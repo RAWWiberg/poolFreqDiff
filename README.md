@@ -4,7 +4,7 @@ Scripts for the analysis of allele frequency differences in genomic data from st
 
 These scripts should be useful in the analysis of e.g. pool-seq data from experimental evolution lines.
 
-All scripts have been tested for python 2.7 and R 3.3.2 in Ubuntu 14.
+All scripts have been tested for python 3 and R 4.3.3 in Ubuntu 22.04.
 
 One step of this analysis requires that the programming language [R](https://www.r-project.org/) be installed on the computer
 
