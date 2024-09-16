@@ -76,8 +76,8 @@ def GetMajorAlleles(cnts,mincnt,minc):
     #print major_alleles
     for i in major_alleles:
         if i[1] < mincnt:
-            return "not SNP"# major allele considered fixed
-    return major_alleles
+            return "not SNP" # major allele considered fixed
+    return(major_alleles)
 
 
 def checkSNP(line,maxc,minc,mincnt):
@@ -96,9 +96,9 @@ def checkSNP(line,maxc,minc,mincnt):
         # then the SNP is considered invalid
         # coverage is counted across As,Ts,Cs and Gs,
         # Ns and INDELs *not* counted
- 	if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
-            return "not SNP"#: coverage too high or too low
-        
+    if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
+        return "not SNP"#: coverage too high or too low
+
     return cnts
 
 def printRlines(cnts,major_alleles,npops,nlevels,n,\
@@ -115,8 +115,8 @@ def printRlines(cnts,major_alleles,npops,nlevels,n,\
             #print pop #script tester line
             samples = []
             for sam in range(0,nlevels):
-                exec "sample_%s=pop[sam]" %(sam)
-            	exec "samples.append(sample_%s)" %(sam)
+                exec("sample_%s=pop[sam]" %(sam))
+                exec("samples.append(sample_%s)" %(sam))
 		#exec "print sample_%s" %(i)
                 allele_i = {"A":0, "T":1, "C":2, "G":3}
                 #print samples #script tester line
@@ -138,8 +138,8 @@ def printRlines(cnts,major_alleles,npops,nlevels,n,\
             #print pop #script tester line
             samples = []
             for sam in range(0,nlevels):
-                exec "sample_%s=pop[sam]" %(sam)
-                exec "samples.append(sample_%s)" %(sam)
+                exec("sample_%s=pop[sam]") %(sam)
+                exec("samples.append(sample_%s)") %(sam)
                 #exec "print sample_%s" %(i)
                 allele_i = {"A":0, "T":1, "C":2, "G":3}
                 #print samples #script tester line
@@ -167,8 +167,8 @@ def printRlines(cnts,major_alleles,npops,nlevels,n,\
             #print pop #script tester line
             samples = []
             for sam in range(0,nlevels):
-                exec "sample_%s=pop[sam]" %(sam)
-                exec "samples.append(sample_%s)" %(sam)
+                exec("sample_%s=pop[sam]") %(sam)
+                exec("samples.append(sample_%s)") %(sam)
                 #exec "print sample_%s" %(i)
                 allele_i = {"A":0, "T":1, "C":2, "G":3}
                 #print samples #script tester line
@@ -198,18 +198,18 @@ def printRlines(cnts,major_alleles,npops,nlevels,n,\
 
     #print counts #script tester line
     counts=','.join(counts)
-    print 'matrix<-array(c('+counts+'),'+\
-          'dim=c('+str(nlevels)+',2,'+str(npops)+'))'
+    print('matrix<-array(c('+counts+'),'+\
+          'dim=c('+str(nlevels)+',2,'+str(npops)+'))')
     #print line #script tester line
-    print 'dat<-get_dat(matrix,zeroes='+zeroes+')'
+    print('dat<-get_dat(matrix,zeroes='+zeroes+')')
     #print 'print(dat)'#Script tester line
-    print 'res<-glm(cbind(A_Cnt,Tot_Cnt-A_Cnt)~tr_l,family="quasibinomial",data=dat)'
+    print('res<-glm(cbind(A_Cnt,Tot_Cnt-A_Cnt)~tr_l,family="quasibinomial",data=dat)')
     #print 'print(summary(res))'#Script tester line
     # The treatment and additionaly variable results start after npops rows of the summary
-    print 'n_rows<-nrow(summary(res)$coefficients)'
-    print 'cat(c("'+line.replace('\n','')+'"'+\
+    print('n_rows<-nrow(summary(res)$coefficients)')
+    print('cat(c("'+line.replace('\n','')+'"'+\
           ',summary(res)$coefficients[n_rows,4])'+\
-          ',sep="\\t","\\n")'
+          ',sep="\\t","\\n")')
 
         
 if __name__ == "__main__":
@@ -264,13 +264,13 @@ if __name__ == "__main__":
         rescale = args['rescale']
         scale = args['scale']
         zeroes=str(args['zeroes'])
-        lines = open(filnam, 'rb')
+        lines = open(filnam, 'r')
         scriptsdir=os.path.dirname(os.path.realpath(__file__))
-        print 'suppressWarnings(library(methods))'
-        print 'currdir<<-"'+scriptsdir+'"'
-        print 'source(paste(currdir,"/poolFreqDiffTest.R",sep=""))'
-        print '#Parameters: ',"npops =",npops,"nlevels =",nlevels,"mincnt =",mincnt,"min coverege =",minc,\
-              "max coverage =",maxc,"rescale =",rescale,"scale =",scale,"zeroes =",zeroes
+        print('suppressWarnings(library(methods))')
+        print('currdir<<-"'+scriptsdir+'"')
+        print('source(paste(currdir,"/poolFreqDiffTest.R",sep=""))')
+        print('#Parameters: ',"npops =",npops,"nlevels =",nlevels,"mincnt =",mincnt,"min coverege =",minc,\
+              "max coverage =",maxc,"rescale =",rescale,"scale =",scale,"zeroes =",zeroes)
         for line in lines:
             SNP = checkSNP(line,maxc,minc,mincnt)
             #print SNP #script tester line
