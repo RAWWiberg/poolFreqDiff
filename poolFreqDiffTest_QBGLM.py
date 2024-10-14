@@ -138,8 +138,7 @@ def printRlines(cnts,major_alleles,npops,nlevels,n,\
             #print pop #script tester line
             samples = []
             for sam in range(0,nlevels):
-                exec("sample_%s=pop[sam]") %(sam)
-                exec("samples.append(sample_%s)") %(sam)
+                samples.append(pop[sam])
                 #exec "print sample_%s" %(i)
                 allele_i = {"A":0, "T":1, "C":2, "G":3}
                 #print samples #script tester line
@@ -167,8 +166,7 @@ def printRlines(cnts,major_alleles,npops,nlevels,n,\
             #print pop #script tester line
             samples = []
             for sam in range(0,nlevels):
-                exec("sample_%s=pop[sam]") %(sam)
-                exec("samples.append(sample_%s)") %(sam)
+                samples.append(pop[sam])
                 #exec "print sample_%s" %(i)
                 allele_i = {"A":0, "T":1, "C":2, "G":3}
                 #print samples #script tester line
